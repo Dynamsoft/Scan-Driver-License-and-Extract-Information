@@ -8,7 +8,7 @@ Dynamsoft Team
 You can check out how it works on this <a target="_blank" href="http://www.dynamsoft.com/Samples/DWT/DWT_HTML_Driver_License_PDF417Barcode/_DWT_HTML_Driver_License_PDF417Barcode.html">demo page</a>.
 
 #### Screenshot
-<img alt="Scan and Edit Images" src="https://github.com/dynamsoftsamples/DWT_HTML_Driver_License_PDF417Barcode/blob/master/DWT_HTML_Driver_License_PDF417Barcode.png" width="250"/>
+<img alt="Read PDF 417 Driver License" src="https://github.com/dynamsoft-dwt/DWT_HTML_Driver_License_PDF417Barcode/blob/master/DWT_HTML_Driver_License_PDF417Barcode.png" width="250"/>
 
 #### Complete Sample
 In order to test the sample on your own, you need to download the complete code from [here](http://www.dynamsoft.com/Samples/DWT/DWT_HTML_Driver_License_PDF417Barcode.zip).
