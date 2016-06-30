@@ -12,7 +12,10 @@ function downloadBarcode_btn() {
 	if(Dynamsoft.Lib.env.bIE) {
 		localBarcodeVersion = DWObject.getSWebTwain().GetAddonVersion("barcode");
 	}
-	if (localBarcodeVersion != Dynamsoft.BarcodeVersion) {
+	var _barcodeVersion = Dynamsoft.BarcodeVersion;
+	if(Dynamsoft.Lib.env.bMac)
+		_barcodeVersion = Dynamsoft.BarcodeMacVersion
+	if (localBarcodeVersion != _barcodeVersion) {
 		var ObjString = [];
 		ObjString.push('<div class="ds-demo-padding" id="barcode-install-dlg">');
 		ObjString.push('The <strong>Barcode Reader</strong> is not installed on this Machine<br />Please click the button below to get it installed');
