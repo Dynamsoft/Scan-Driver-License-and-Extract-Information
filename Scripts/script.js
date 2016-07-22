@@ -9,7 +9,7 @@ var driverLicenseFields = [];
 
 function downloadBarcode_btn() {
 	var localBarcodeVersion = DWObject._innerFun('GetAddOnVersion', '["barcode"]');
-	if(Dynamsoft.Lib.env.bIE) {
+	if(!Dynamsoft.Lib.product.bChromeEdition && DWObject.getSWebTwain != undefined) {
 		localBarcodeVersion = DWObject.getSWebTwain().GetAddonVersion("barcode");
 	}
 	var _barcodeVersion = Dynamsoft.BarcodeVersion;
@@ -73,7 +73,7 @@ function Dynamsoft_OnReady() {
 		*/
 		if(!Dynamsoft.Lib.env.bMac) {
 			var localPDFRVersion = DWObject._innerFun('GetAddOnVersion', '["pdf"]');	
-			if(Dynamsoft.Lib.env.bIE) {
+			if(!Dynamsoft.Lib.product.bChromeEdition && DWObject.getSWebTwain != undefined) {
 				localPDFRVersion = DWObject.getSWebTwain().GetAddonVersion("pdf");
 			}
 			if (localPDFRVersion != Dynamsoft.PdfVersion) {
