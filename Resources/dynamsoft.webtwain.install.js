@@ -1,13 +1,17 @@
 
 function OnWebTwainNotFoundOnWindowsCallback(ProductName, InstallerUrl, bHTML5, bIE, bSafari, bSSL, strIEVersion) {
-	_show_install_dialog(ProductName, InstallerUrl, bHTML5, false, bIE, bSafari, bSSL, strIEVersion);
+	_show_install_dialog(ProductName, InstallerUrl, bHTML5, EnumDWT_PlatformType.enumWindow, bIE, bSafari, bSSL, strIEVersion);
+}
+
+function OnWebTwainNotFoundOnLinuxCallback(ProductName, InstallerUrl, bHTML5, bIE, bSafari, bSSL, strIEVersion) {
+	_show_install_dialog(ProductName, InstallerUrl, bHTML5, EnumDWT_PlatformType.enumLinux, bIE, bSafari, bSSL, strIEVersion);
 }
 
 function OnWebTwainNotFoundOnMacCallback(ProductName, InstallerUrl, bHTML5, bIE, bSafari, bSSL, strIEVersion) {
-	_show_install_dialog(ProductName, InstallerUrl, bHTML5, true, bIE, bSafari, bSSL, strIEVersion);
+	_show_install_dialog(ProductName, InstallerUrl, bHTML5, EnumDWT_PlatformType.enumMac, bIE, bSafari, bSSL, strIEVersion);
 }
 
-function _show_install_dialog(ProductName, InstallerUrl, bHTML5, bMac, bIE, bSafari, bSSL, strIEVersion){
+function _show_install_dialog(ProductName, InstallerUrl, bHTML5, iPlatform, bIE, bSafari, bSSL, strIEVersion){
 	
 	var _height = 220, ObjString = [
 			'<div class="dwt-box-title">',
@@ -23,19 +27,28 @@ function _show_install_dialog(ProductName, InstallerUrl, bHTML5, bMac, bIE, bSaf
 		if(bIE){
 			ObjString.push('<div>');
 			ObjString.push('If you still see the dialog after installing the scan plugin, please<br />');
-			ObjString.push('1. <a href="http://windows.microsoft.com/en-us/windows/security-zones-adding-removing-websites#1TC=windows-7">add the current website to the Trusted Sites list</a>.<br />');
+			ObjString.push('1. Add the website to the zone of trusted sites.<br />');
+			ObjString.push('IE | Tools | Internet Options | Security | Trusted Sites.<br />');
 			ObjString.push('2. refresh your browser.');
 			ObjString.push('</div>');
 			
-			_height = 240;
+			_height = 260;
 		} else {
 
-			if(bMac && bSafari && bSSL){
+			if(iPlatform == EnumDWT_PlatformType.enumMac && bSafari && bSSL){
 				ObjString.push('<div>');
 				ObjString.push('After the installation, you also need to refer to <br />');
 				ObjString.push('<a href="http://kb.dynamsoft.com/questions/901">this article</a> to enable the scan plugin on the current HTTPS website.');
 				ObjString.push('</div>');
 				_height = 270;
+			}
+			else
+			{		
+			    ObjString.push('<div>');
+			    ObjString.push('If you still see the dialog after the installation,<br />');
+			    ObjString.push('please check <a href="http://developer.dynamsoft.com/dwt/why-is-the-browser-prompting-me-to-install-the-scanning-service-repeatedly ">this article</a> for troubleshooting.');
+			    ObjString.push('</div>');
+			    _height = 260;
 			}
 			
 			ObjString.push('<div class="dwt-red" style="padding-top: 10px;">After installation, please REFRESH your browser.</div>');
@@ -48,7 +61,7 @@ function _show_install_dialog(ProductName, InstallerUrl, bHTML5, bMac, bIE, bSaf
 			ObjString.push('1. refresh the browser<br />');
 			ObjString.push('2. allow "DynamicWebTWAIN" add-on to run by right clicking on the Information Bar in the browser.');
 			ObjString.push('</div>');
-			_height = 240;
+			_height = 260;
 		} else {
 			ObjString.push('<p class="dwt-red" style="padding-top: 10px;">After installation, please REFRESH your browser.</p>');
 		}

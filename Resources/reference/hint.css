@@ -195,7 +195,7 @@
 }
 
 .ds-dwt-dialogProgress{
-	width:400px
+	width:300px
 }
 
 .DYNLogo
@@ -203,4 +203,9 @@
     background:url(logo.gif) left top no-repeat; 
     width:159px; 
     height:39px;
+}
+
+dialog {
+-webkit-box-sizing: content-box;
+box-sizing: content-box;
 }
