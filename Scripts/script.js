@@ -17,9 +17,9 @@ function downloadBarcode_btn() {
 		_barcodeVersion = Dynamsoft.BarcodeMacVersion
 	if (localBarcodeVersion != _barcodeVersion) {
 		var ObjString = [];
-		ObjString.push('<div class="ds-demo-padding" id="barcode-install-dlg">');
+		ObjString.push('<div class="p15" id="barcode-install-dlg">');
 		ObjString.push('The <strong>Barcode Reader</strong> is not installed on this Machine<br />Please click the button below to get it installed');
-		ObjString.push('<p class="ds-demo-center"><input type="button" value="Install Barcode Reader" onclick="downloadBarcode();" class="ds-demo-blue ds-demo-btn-large ds-demo-border-0 ds-demo-margin ds-font-size-18" /><hr></p>');
+		ObjString.push('<p class="tc mt15 mb15"><input type="button" value="Install Barcode Reader" onclick="downloadBarcode();" class="btn lgBtn bgBlue" /><hr></p>');
 		ObjString.push('<i><strong>The installation is a one-time process</strong> <br />It might take some time depending on your network.</i>');
 		ObjString.push('</div>');
 		Dynamsoft.WebTwainEnv.ShowDialog(400,310, ObjString.join(''));
@@ -78,9 +78,9 @@ function Dynamsoft_OnReady() {
 			}
 			if (localPDFRVersion != Dynamsoft.PdfVersion) {
 				var ObjString = [];
-				ObjString.push('<div class="ds-demo-padding" id="pdfr-install-dlg">');
+				ObjString.push('<div class="p15" id="pdfr-install-dlg">');
 				ObjString.push('The <strong>PDF Rasterizer</strong> is not installed on this PC<br />Please click the button below to get it installed');
-				ObjString.push('<p class="ds-demo-center"><input type="button" value="Install PDF Rasterizer" onclick="downloadPDFR();" class="ds-demo-blue ds-demo-btn-large ds-demo-border-0 ds-demo-margin ds-font-size-18" /><hr></p>');
+				ObjString.push('<p class="tc mt15 mb15"><input type="button" value="Install PDF Rasterizer" onclick="downloadPDFR();" class="btn lgBtn bgBlue" /><hr></p>');
 				ObjString.push('<i><strong>The installation is a one-time process</strong> <br />It might take some time depending on your network.</i>');
 				ObjString.push('</div>');
 				Dynamsoft.WebTwainEnv.ShowDialog(400,310, ObjString.join(''));
