@@ -63,9 +63,9 @@ function Dynamsoft_OnReady() {
 	blankField = document.getElementsByClassName('div-fields-item')[0].cloneNode(true);
 	DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
 	if (DWObject) {
-		DWObject.IfSSL = DynamLib.detect.ssl;
+		DWObject.IfSSL = Dynamsoft.Lib.detect.ssl;
 		var _strPort = location.port == "" ? 80 : location.port;
-		if (DynamLib.detect.ssl == true)
+		if (Dynamsoft.Lib.detect.ssl == true)
 			_strPort = location.port == "" ? 443 : location.port;
 		DWObject.HTTPPort = _strPort;
 		/*

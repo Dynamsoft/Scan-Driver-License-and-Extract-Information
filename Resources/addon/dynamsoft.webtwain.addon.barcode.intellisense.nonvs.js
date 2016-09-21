@@ -7,7 +7,7 @@
 *
 * Copyright 2016, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
-* Version: 11.3.2
+* Version: 12.0
 */
 
 /** this barcode format is different with twain defined */
