@@ -8,8 +8,11 @@ var Barcode_text;
 var driverLicenseFields = [];
 
 function downloadBarcode_btn() {
-	var localBarcodeVersion = DWObject._innerFun('GetAddOnVersion', '["barcode"]');
-	if(!Dynamsoft.Lib.product.bChromeEdition && DWObject.getSWebTwain != undefined) {
+	var localBarcodeVersion = '';
+	if(Dynamsoft.Lib.product.bChromeEdition){
+		localBarcodeVersion = DWObject._innerFun('GetAddOnVersion', '["barcode"]');
+	}
+	else {
 		localBarcodeVersion = DWObject.getSWebTwain().GetAddonVersion("barcode");
 	}
 	var _barcodeVersion = Dynamsoft.BarcodeVersion;
@@ -72,10 +75,13 @@ function Dynamsoft_OnReady() {
 		* Make sure the PDF Rasterizer and OCR add-on are already installedsample
 		*/
 		if(!Dynamsoft.Lib.env.bMac) {
-			var localPDFRVersion = DWObject._innerFun('GetAddOnVersion', '["pdf"]');	
-			if(!Dynamsoft.Lib.product.bChromeEdition && DWObject.getSWebTwain != undefined) {
-				localPDFRVersion = DWObject.getSWebTwain().GetAddonVersion("pdf");
+            var localPDFRVersion = '';
+			if(Dynamsoft.Lib.product.bChromeEdition){
+				localPDFRVersion = DWObject._innerFun('GetAddOnVersion', '["pdf"]');
 			}
+            else {
+                localPDFRVersion = DWObject.getSWebTwain().GetAddonVersion("pdf");
+            }	
 			if (localPDFRVersion != Dynamsoft.PdfVersion) {
 				var ObjString = [];
 				ObjString.push('<div class="p15" id="pdfr-install-dlg">');
