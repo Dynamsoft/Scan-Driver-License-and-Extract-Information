@@ -6,6 +6,7 @@ var CurrentPath = CurrentPathName.substring(0, CurrentPathName.lastIndexOf("/") 
 var	strHTTPServer = location.hostname;	
 var Barcode_text;
 var driverLicenseFields = [];
+var _strPort;
 
 function downloadBarcode_btn() {
 	var localBarcodeVersion = '';
@@ -34,7 +35,7 @@ function downloadBarcode_btn() {
 function downloadPDFR() {
 	Dynamsoft__OnclickCloseInstallEx();
 	DWObject.Addon.PDF.Download(
-		CurrentPath + '/Resources/addon/Pdf.zip',
+		Dynamsoft.WebTwainEnv.ResourcesPath + '/addon/Pdf.zip',
 		function() {
 			/*console.log('PDF dll is installed');*/
 			downloadBarcode_btn();
@@ -47,9 +48,9 @@ function downloadPDFR() {
 
 function downloadBarcode() {
 	Dynamsoft__OnclickCloseInstallEx();	
-	var _barcodePath = CurrentPath + '/Resources/addon/Barcode.zip';
+	var _barcodePath = Dynamsoft.WebTwainEnv.ResourcesPath + '/addon/Barcode.zip';
 	if(Dynamsoft.Lib.env.bMac) {
-		_barcodePath = CurrentPath + '/Resources/addon/MacBarcode.zip'
+		_barcodePath = Dynamsoft.WebTwainEnv.ResourcesPath + '/addon/MacBarcode.zip'
 	}
 	DWObject.Addon.Barcode.Download(
 		_barcodePath,
@@ -67,7 +68,7 @@ function Dynamsoft_OnReady() {
 	DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
 	if (DWObject) {
 		DWObject.IfSSL = Dynamsoft.Lib.detect.ssl;
-		var _strPort = location.port == "" ? 80 : location.port;
+		_strPort = location.port == "" ? 80 : location.port;
 		if (Dynamsoft.Lib.detect.ssl == true)
 			_strPort = location.port == "" ? 443 : location.port;
 		DWObject.HTTPPort = _strPort;
@@ -321,6 +322,7 @@ function LoadImages() {
 						},
 						function (errorCode, errorString) {
 							alert('Load Image:' + aryFilePaths[i]._filePath + errorString);
+							Dynamsoft.Lib.detect.hideMask();
 						}
 					);
 				}
