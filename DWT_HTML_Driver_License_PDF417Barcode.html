@@ -1,85 +1,134 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Use Dynamic Web TWAIN to Read PDF417 Barcode on Driver Licenses</title>
-	<script type="text/javascript" src="https://www.dynamsoft.com/Demo/DWT/Resources/dynamsoft.webtwain.initiate.js?t=150418"> </script>
-    <script type="text/javascript" src="https://www.dynamsoft.com/Demo/DWT/Resources/dynamsoft.webtwain.config.js"> </script>
-    <script type="text/javascript" src="https://www.dynamsoft.com/Demo/DWT/Resources/addon/dynamsoft.webtwain.addon.pdf.js"> </script>
-    <script type="text/javascript" src="https://www.dynamsoft.com/Demo/DWT/Resources/addon/dynamsoft.webtwain.addon.barcode.js"> </script>
-	<link rel="stylesheet" href="Style/ds.demo.css">
+    <title>Use Dynamic Web TWAIN to Read PDF417 Barcode on Driver Licenses</title>
+    <script src="https://unpkg.com/dwt/dist/dynamsoft.webtwain.min.js"> </script>
+    <script src="https://tst.dynamsoft.com/libs/dbr/6.5.2/dynamsoft.barcodereader.initiate.js"> </script>
+    <script src="https://tst.dynamsoft.com/libs/dbr/6.5.2/dynamsoft.barcodereader.config.js"> </script>
+    <link rel="stylesheet" href="Style/ds.demo.css">
 </head>
+
 <body>
-<div id="header"> <span onclick="this.parentElement.style.display='none'" class="close">&times;</span>
-    <div class="container">
-        <div id="headerTop" class="row">
-            <div class="ct-lt fl clearfix">
-                <div class="logo mr20 fl"> <img src="Style/Images/logo-dwt-56x56.png" alt="Logo"> </div>
-                <div class="fl">
-                    <div class="linkGroup"> <a target="_blank" class="bluelink ds-font-size-14" href="http://www.dynamsoft.com">Dynamsoft</a><span> / </span> <a target="_blank" class="bluelink" href="http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx">Dynamic Web TWAIN</a><span> / </span> <a target="_blank" class="bluelink" href="http://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx">Code Gallery</a><span> / </span> </div>
-                    <h1>Reading PDF417 Barcode on Driver's License</h1>
+    <div id="tipTop">
+        <span onclick="this.parentElement.style.display='none'" class="close">&times;</span>
+        <p>This demo only works in mordern browsers like Chrome, Firefox, Edge, IE 8+, etc. on Windows</p>
+    </div>
+    <div id="header">
+        <span onclick="this.parentElement.style.display='none'" class="close">&times;</span>
+        <div class="container">
+            <div id="headerTop" class="row">
+                <div class="ct-lt fl clearfix">
+                    <div class="logo mr20 fl">
+                        <img src="Style/Images/logo-dwt-56x56.png" alt="Logo"> </div>
+                    <div class="fl">
+                        <div class="linkGroup">
+                            <a target="_blank" class="bluelink ds-font-size-14"
+                                href="http://www.dynamsoft.com">Dynamsoft</a>
+                            <span> / </span>
+                            <a target="_blank" class="bluelink"
+                                href="http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx">Dynamic Web TWAIN</a>
+                            <span> / </span>
+                            <a target="_blank" class="bluelink"
+                                href="http://www.dynamsoft.com/Downloads/WebTWAIN-Sample-Download.aspx">Code Gallery</a>
+                            <span> / </span>
+                        </div>
+                        <h1>Reading PDF417 Barcode on US Driver's License</h1>
+                    </div>
+                </div>
+                <div class="ct-rt fr">
+                    <a target="_blank" href="http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx"
+                        class="btn lgBtn bgOrange">Download SDK</a>
                 </div>
             </div>
-            <div class="ct-rt fr"><a target="_blank" href="http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx" class="btn lgBtn bgOrange">Download SDK</a> </div>
+            <div id="headerBtm" class="row">The demo demonstrates how to scan or load a picture of a US driver's license
+                which contains a PDF417 Barcode and
+                then extract the information from the barcode.</div>
         </div>
-        <div id="headerBtm" class="row">The demo demonstrates how to scan or load a picture of a driver's license which contains a PDF417 Barcode and then extract the information from the barcode.</div>
     </div>
-</div>
-<div id="main">
-    <div class="container">
-        <div class="ct-lt clearfix"> 
-            <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
+    <div id="main">
+        <div class="container">
+            <div class="ct-lt clearfix">
+                <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
              If you need to rename the id, you should also change the id in the dynamsoft.webtwain.config.js accordingly. -->
-            <div id="dwtcontrolContainer"></div>
-        </div>
-        <div class="ct-rt">
-            <div class="content clearfix">
-                <input type="button" value="Scan" onclick="AcquireImage();" class="btn mr20" />
-                <input type="button" value="Open a Local File" onclick="LoadImages();" class="btn" />
-                <br />
-                <input type="button" value="Read Driver&apos;s License" onclick="ReadBarcode();"  class="mt25 btn bgBlue" style="width:275px;"/>
-                <div class="mt20" id="div-extra-fields" style="display:none; max-height:420px;">
-                    <div class="div-fields-item">
-                        <input type="text" style="width: 127px;" placeholder="Field Name" />
-                        :
-                        <input type="text" style="margin-left:10px!important;" placeholder="Field Value" />
+                <div id="dwtcontrolContainer"></div>
+            </div>
+            <div class="ct-rt">
+                <div class="content clearfix">
+                    <input type="button" value="Scan" onclick="AcquireImage();" class="btn mr20" />
+                    <input type="button" value="Open a Local File" onclick="LoadImages();" class="btn" />
+                    <br />
+                    <input type="button" id="btnReadBarcode" value="Read Driver&apos;s License" onclick="ReadBarcode();"
+                        class="mt25 btn bgBlue" style="width:275px; visibility:hidden" />
+                    <br />
+                    <br />
+                    <div id="DWTcontainerBtm" class="section" style="visibility:hidden">
+                        <p>Result: (double click to clear)</p>
+                        <div id="divNoteMessage" ondblclick="this.innerHTML = '';"> </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div id="footer"> <span onclick="this.parentElement.style.display='none'" class="close">&times;</span>
-    <div class="container">
-        <div id="footerTop" class="row">
-            <div class="item contact"> <strong class="fc4">Contact Us</strong>
-                <ul>
-                    <li><a class="graylink" href="mailto:support@dynamsoft.com">support@dynamsoft.com</a></li>
-                    <li><a target="_blank" class="graylink" href="http://www.dynamsoft.com/Support/LiveHelp.aspx">Live Chat</a> / <a target="_blank" class="graylink" href="http://www.dynamsoft.com/Support/LiveHelp.aspx">Submit a Form</a></li>
-                    <li>1-604-605-5491 (Toll-Free)</li>
-                </ul>
+    <div id="footer">
+        <span onclick="this.parentElement.style.display='none'" class="close">&times;</span>
+        <div class="container">
+            <div id="footerTop" class="row">
+                <div class="item contact">
+                    <strong class="fc4">Contact Us</strong>
+                    <ul>
+                        <li>
+                            <a class="graylink" href="mailto:support@dynamsoft.com">support@dynamsoft.com</a>
+                        </li>
+                        <li>
+                            <a target="_blank" class="graylink"
+                                href="http://www.dynamsoft.com/Support/LiveHelp.aspx">Live Chat</a> /
+                            <a target="_blank" class="graylink"
+                                href="http://www.dynamsoft.com/Support/LiveHelp.aspx">Submit a Form</a>
+                        </li>
+                        <li>1-604-605-5491 (Toll-Free)</li>
+                    </ul>
+                </div>
+                <div class="item features">
+                    <strong class="fc4">Features Demonstrated</strong>
+                    <ul class="org-li">
+                        <li>Scan documents &amp; load local Images</li>
+                        <li>Rasterize and load local PDF files</li>
+                        <li>Read PDF417 on US Driver's License</li>
+                    </ul>
+                </div>
+                <div class="item license">
+                    <strong class="fc4">License Required</strong>
+                    <ul class="org-li">
+                        <li>Core SDK licenses (HTML5 for Windows)</li>
+                        <li>Add-on License for PDF Rasterizer (if needed)</li>
+                        <li>Add-on License for PDF417 Barcode Reader</li>
+                        <li>
+                            <a class="bluelink" href="mailto:sales@dynamsoft.com">Contact Dynamsoft Sales</a>&nbsp;
+                            <span class="fcBlue"> | </span>&nbsp;
+                            <a target="_blank" class="bluelink"
+                                href="https://www.dynamsoft.com/Secure/WebTWAIN_BuyIt.aspx">Visit Online Store</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="item features"> <strong class="fc4">Features Demonstrated</strong>
-                <ul class="org-li">
-                    <li>Scan documents & load local Images</li>
-                    <li>Rasterize and load local PDF files</li>
-                    <li>Read PDF417 on Driver's License</li>
-                </ul>
+            <div id="footerBtm" class="row">
+                <div class="ct-lt tc fl">&copy; 2003 -
+                    <script>
+                        document.write((new Date()).getFullYear());
+                    </script> Dynamsoft. All rights reserved.
+                    <a href="http://www.dynamsoft.com/PrivacyStatement.aspx">Privacy Statement</a> /
+                    <a href="http://www.dynamsoft.com/SiteMap.html">Site Map</a>
+                </div>
+                <div class="ct-rt tr fr">
+                    <a href="http://www.dynamsoft.com/">Home</a> /
+                    <a href="http://www.dynamsoft.com/Purchase/Purchase.aspx">Purchase</a> /
+                    <a href="http://www.dynamsoft.com/Support/Support.aspx">Support</a>
+                </div>
             </div>
-            <div class="item license"> <strong class="fc4">License Required</strong>
-                <ul class="org-li">
-                    <li>Core SDK licenses (Windows or Mac or HTML5)</li>
-                    <li>Add-on License for PDF Rasterizer (if needed)</li>
-                    <li>Add-on License for PDF417 Barcode Reader</li>
-                    <li><a class="bluelink" href="mailto:sales@dynamsoft.com">Contact Dynamsoft Sales</a>&nbsp;<span class="fcBlue"> | </span>&nbsp;<a target="_blank" class="bluelink" href="https://www.dynamsoft.com/Secure/WebTWAIN_BuyIt.aspx">Visit Online Store</a></li>
-                </ul>
-            </div>
-        </div>
-        <div id="footerBtm" class="row">
-            <div class="ct-lt tc fl">&copy; 2003 - <script>document.write((new Date()).getFullYear());</script> Dynamsoft. All rights reserved. <a href="http://www.dynamsoft.com/PrivacyStatement.aspx">Privacy Statement</a> / <a href="http://www.dynamsoft.com/SiteMap.html">Site Map</a> </div>
-            <div class="ct-rt tr fr"><a href="http://www.dynamsoft.com/">Home</a> / <a href="http://www.dynamsoft.com/Purchase/Purchase.aspx">Purchase</a> / <a href="http://www.dynamsoft.com/Support/Support.aspx">Support</a></div>
         </div>
     </div>
-</div>
-<script src="Scripts/script.js"></script>
+    <script src="Scripts/script.js"></script>
 </body>
+
 </html>
