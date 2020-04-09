@@ -6,7 +6,7 @@ Dynamsoft Team
 2019-08-05
 
 #### See it in Action
-You can check out how it works on this <a target="_blank" href="http://www.dynamsoft.com/Samples/DWT/DWT_HTML_Driver_License_PDF417Barcode/DWT_HTML_Driver_License_PDF417Barcode.html">demo page</a>.
+You can check out how it works on this <a target="_blank" href="https://demo.dynamsoft.com/Samples/dwt/Scan-Driver-License-and-Extract-Information/DWT_HTML_Driver_License_PDF417Barcode.html">demo page</a>.
 
 #### Screenshot
 <img alt="Read PDF 417 Driver License" src="https://github.com/dynamsoft-dwt/DWT_HTML_Driver_License_PDF417Barcode/blob/master/DWT_HTML_Driver_License_PDF417Barcode.png" width="250"/>
