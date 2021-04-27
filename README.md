@@ -5,6 +5,10 @@ The demo demonstrates how to scan or load a picture of a driver's license which 
 Dynamsoft Team
 2019-08-05
 
+## What You Should Know
+- [![](https://img.shields.io/badge/Download-Offline%20SDK-orange)](https://www.dynamsoft.com/web-twain/downloads)
+- [![](https://img.shields.io/badge/Get-30--day%20FREE%20Trial%20License-blue)](https://www.dynamsoft.com/customer/license/trialLicense/?product=dwt)
+
 #### See it in Action
 You can check out how it works on this <a target="_blank" href="https://demo.dynamsoft.com/Samples/dwt/Scan-Driver-License-and-Extract-Information/DWT_HTML_Driver_License_PDF417Barcode.html">demo page</a>.
 
